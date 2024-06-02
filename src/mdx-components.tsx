@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import { cx } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { text } from "styled-system/recipes";
 
 // biome-ignore lint/style/useNamingConvention:
@@ -11,6 +11,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h4: (props) => <h4 {...props} className={cx(props?.className, text({ size: "xl" }))} />,
     h5: (props) => <h5 {...props} className={cx(props?.className, text({ size: "lg" }))} />,
     h6: (props) => <h6 {...props} className={cx(props?.className, text({ size: "md" }))} />,
+    pre: (props) => (
+      <pre {...props} className={cx(props?.className, css({ p: 4, rounded: "md" }))} />
+    ),
     ...components,
   };
 }

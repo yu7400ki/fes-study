@@ -1,5 +1,5 @@
-import ShadowDom from "./shadow-dom";
 import { Box } from "styled-system/jsx";
+import ShadowDom from "./shadow-dom";
 
 type Props = {
   children: React.ReactNode;

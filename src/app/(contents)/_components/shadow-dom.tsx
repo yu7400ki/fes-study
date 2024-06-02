@@ -26,7 +26,5 @@ export default function ShadowDom({ html }: Props) {
     };
   }, [html]);
 
-  return (
-    <div ref={ref} />
-  );
+  return <div ref={ref} />;
 }

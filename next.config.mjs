@@ -1,5 +1,6 @@
 import createMdx from "@next/mdx";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkBreaks from "remark-breaks";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -9,7 +10,7 @@ const nextConfig = {
 
 const withMdx = createMdx({
   options: {
-    remarkPlugins: [remarkFrontmatter],
+    remarkPlugins: [remarkFrontmatter, remarkBreaks],
     rehypePlugins: [],
   },
 });

@@ -4,19 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css } from "styled-system/css";
 
-type Sidebar = {
+export type SidebarData = {
   title: string;
   pages: { name: string; path: string }[];
 }[];
 
-const sidebar: Sidebar = [
-  {
-    title: "概要",
-    pages: [{ name: "イントロダクション", path: "/" }],
-  },
-];
+type Props = {
+  data: SidebarData;
+};
 
-export default function Sidebar() {
+export default function Sidebar({ data }: Props) {
   const pathname = usePathname();
 
   return (
@@ -29,7 +26,7 @@ export default function Sidebar() {
         },
       })}
     >
-      {sidebar.map((section) => (
+      {data.map((section) => (
         <section key={section.title}>
           <h2 className={css({ mb: 4 })}>{section.title}</h2>
           <ul

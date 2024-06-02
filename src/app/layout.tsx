@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Container } from "styled-system/jsx";
+import { Sidebar } from "./_components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Container
+          my={12}
+          maxWidth="6xl"
+          display="grid"
+          gridTemplateColumns="auto 1fr"
+          gap={{
+            base: 2,
+            md: 4,
+            lg: 6,
+          }}
+        >
+          <Sidebar />
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }

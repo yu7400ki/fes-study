@@ -1,0 +1,71 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "files": {
+    "ignore": [".next", ".vercel", "node_modules", "create-style-context.tsx"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "all": true,
+      "correctness": {
+        "noUndeclaredVariables": "off",
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "useExportType": "error",
+        "useImportType": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["kebab-case", "export"]
+          }
+        },
+        "noDefaultExport": "off",
+        "noImplicitBoolean": "off",
+        "noNamespaceImport": "off"
+      },
+      "nursery": {
+        "useImportRestrictions": "error"
+      },
+      "complexity": {
+        "noUselessLoneBlockStatements": "off",
+        "useSimplifiedLogicExpression": "off",
+        "noStaticOnlyClass": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
+      "trailingComma": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100,
+      "quoteProperties": "asNeeded"
+    }
+  }
+}

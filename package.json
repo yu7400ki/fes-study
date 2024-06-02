@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint ./src --apply",
+    "check": "biome check ./src",
+    "check:fix": "biome check ./src --apply",
+    "format": "biome format ./src --write"
   },
   "dependencies": {
     "react": "^18",
@@ -14,9 +18,10 @@
     "next": "14.2.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@biomejs/biome": "1.7.3",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   }
 }

@@ -9,7 +9,7 @@ export default function Layout({
     <main
       className={css({
         "& * + *": {
-          mt: 4,
+          mt: "1em",
         },
       })}
     >

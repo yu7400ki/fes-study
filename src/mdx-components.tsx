@@ -1,15 +1,16 @@
 import type { MDXComponents } from "mdx/types";
-import { Text } from "@/components/ui";
+import { cx } from "styled-system/css";
+import { text } from "styled-system/recipes";
 
 // biome-ignore lint/style/useNamingConvention:
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children }) => <Text size="4xl">{children}</Text>,
-    h2: ({ children }) => <Text size="3xl">{children}</Text>,
-    h3: ({ children }) => <Text size="2xl">{children}</Text>,
-    h4: ({ children }) => <Text size="xl">{children}</Text>,
-    h5: ({ children }) => <Text size="md">{children}</Text>,
-    h6: ({ children }) => <Text size="sm">{children}</Text>,
+    h1: (props) => <h1 {...props} className={cx(props?.className, text({ size: "4xl" }))} />,
+    h2: (props) => <h2 {...props} className={cx(props?.className, text({ size: "3xl" }))} />,
+    h3: (props) => <h3 {...props} className={cx(props?.className, text({ size: "2xl" }))} />,
+    h4: (props) => <h4 {...props} className={cx(props?.className, text({ size: "xl" }))} />,
+    h5: (props) => <h5 {...props} className={cx(props?.className, text({ size: "lg" }))} />,
+    h6: (props) => <h6 {...props} className={cx(props?.className, text({ size: "md" }))} />,
     ...components,
   };
 }

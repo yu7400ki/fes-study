@@ -8,7 +8,7 @@ export default function Layout({
   return (
     <main
       className={css({
-        "& * + *": {
+        "& > * + *": {
           mt: "1em",
         },
       })}

@@ -1,5 +1,5 @@
 pre-push:
   commands:
     biome:
-      glob: "./src/**/*.{js,ts,jsx,tsx}"
-      run: bun biome check {staged_files}
+      glob: "*.{js,ts,jsx,tsx}"
+      run: bun biome check {push_files}

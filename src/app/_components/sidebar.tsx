@@ -46,7 +46,7 @@ export default function Sidebar() {
                   className={css({
                     color: {
                       base: "fg.muted",
-                      _currentPage: "fg.default",
+                      _currentPage: "accent.default",
                     },
                     textDecoration: {
                       base: "none",

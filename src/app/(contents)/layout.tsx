@@ -8,8 +8,9 @@ export default function Layout({
   return (
     <main
       className={css({
+        lineHeight: "relaxed",
         "& > * + *": {
-          mt: "1em",
+          mt: "1.5em",
         },
       })}
     >

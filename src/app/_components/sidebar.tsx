@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css, cx } from "styled-system/css";
-import { button } from "styled-system/recipes";
+import { iconButton } from "styled-system/recipes";
 
 export type SidebarData = {
   title: string;
@@ -87,11 +87,10 @@ export default function Sidebar({ data }: Props) {
       >
         <button
           type="button"
-          className={cx(button({ size: "sm", variant: "ghost" }), css({ color: "fg.muted" }))}
+          className={cx(iconButton({ size: "xs", variant: "ghost" }), css({ color: "fg.muted" }))}
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
-          {theme === "light" ? <SunIcon size="1em" /> : <MoonIcon size="1em" />}
-          {theme}
+          {theme === "light" ? <SunIcon /> : <MoonIcon />}
         </button>
       </div>
     </aside>

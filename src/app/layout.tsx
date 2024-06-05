@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Container } from "styled-system/jsx";
 import { Sidebar, type SidebarData } from "./_components";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,22 +29,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja" suppressHydrationWarning>
       <body className={inter.className}>
-        <Container
-          my={12}
-          maxWidth="6xl"
-          display="grid"
-          gridTemplateColumns="auto 1fr"
-          gap={{
-            base: 2,
-            md: 4,
-            lg: 6,
-          }}
-        >
-          <Sidebar data={sidebar} />
-          {children}
-        </Container>
+        <ThemeProvider defaultTheme="light" attribute="class">
+          <Container
+            maxWidth="6xl"
+            display="flex"
+            gap={{
+              base: 2,
+              md: 4,
+              lg: 6,
+            }}
+          >
+            <Sidebar data={sidebar} />
+            {children}
+          </Container>
+        </ThemeProvider>
       </body>
     </html>
   );

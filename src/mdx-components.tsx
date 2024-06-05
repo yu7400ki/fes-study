@@ -1,7 +1,7 @@
+import { Table } from "@/components/ui";
 import type { MDXComponents } from "mdx/types";
 import { css, cva, cx } from "styled-system/css";
 import { code, text } from "styled-system/recipes";
-import { Table } from "@/components/ui";
 
 // biome-ignore lint/style/useNamingConvention:
 export function useMDXComponents(components: MDXComponents): MDXComponents {

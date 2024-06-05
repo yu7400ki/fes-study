@@ -1,10 +1,10 @@
 "use client";
 
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css, cx } from "styled-system/css";
-import { SunIcon, MoonIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import { button } from "styled-system/recipes";
 
 export type SidebarData = {

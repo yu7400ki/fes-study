@@ -2,6 +2,7 @@ import createMdx from "@next/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkBreaks from "remark-breaks";
 import rehypeShiki from "@shikijs/rehype";
+import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 
 /** @type {import('next').NextConfig} */
@@ -12,7 +13,7 @@ const nextConfig = {
 
 const withMdx = createMdx({
   options: {
-    remarkPlugins: [remarkFrontmatter, remarkBreaks],
+    remarkPlugins: [remarkFrontmatter, remarkBreaks, remarkGfm],
     rehypePlugins: [
       [rehypeShiki, { theme: "github-dark" }],
       () => (tree) => {

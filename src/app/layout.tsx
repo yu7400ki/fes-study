@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { cx } from "styled-system/css";
 import { Container } from "styled-system/jsx";
 import { Sidebar, type SidebarData } from "./_components";
 
 const inter = Inter({ subsets: ["latin"] });
+const notoSansJp = Noto_Sans_JP({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={cx(inter.className, notoSansJp.className)}>
         <ThemeProvider defaultTheme="light" attribute="class">
           <Container
             maxWidth="6xl"

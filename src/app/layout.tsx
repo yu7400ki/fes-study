@@ -16,6 +16,10 @@ const sidebar: SidebarData = [
     title: "概要",
     pages: [{ name: "イントロダクション", path: "/" }],
   },
+  {
+    title: "CSS",
+    pages: [{ name: "セレクターの基本", path: "/css/basic-selectors" }],
+  },
 ];
 
 export default function RootLayout({

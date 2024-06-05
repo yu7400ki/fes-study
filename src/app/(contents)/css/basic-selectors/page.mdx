@@ -1,0 +1,271 @@
+---
+title: セレクターの基本
+---
+
+import { WebExample } from "../../_components";
+
+# セレクターの基本
+
+## セレクターとは
+
+セレクターは、スタイルを適用する要素を指定するための記法です。セレクターを使うことで、スタイルを適用する要素を指定することができます。
+
+## 要素型セレクター
+
+要素型セレクターは、要素の名前を指定するセレクターです。
+
+<WebExample>
+  <style>
+    {`
+      h1 {
+        color: red;
+      }
+    `}
+  </style>
+  <h1>Hello</h1>
+  <h2>World</h2>
+</WebExample>
+
+```css
+h1 {
+  color: red;
+}
+```
+
+```html
+<h1>Hello</h1>
+<h2>World</h2>
+```
+
+上記の例では、`h1`要素に対して`color`プロパティに`red`を指定しています。
+
+## クラスセレクター
+
+クラスセレクターは、ピリオド（`.`）を先頭に付けてクラス名を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .red {
+        color: red;
+      }
+    `}
+  </style>
+  <p className="red">Hello</p>
+  <p>World</p>
+</WebExample>
+
+```css
+.red {
+  color: red;
+}
+```
+
+```html
+<p class="red">Hello</p>
+<p>World</p>
+```
+
+上記の例では、`.red`クラスに対して`color`プロパティに`red`を指定しています。`
+
+## IDセレクター
+
+IDセレクターは、ハッシュ（`#`）を先頭に付けてID名を指定します。
+
+<WebExample>
+  <style>
+    {`
+      #red {
+        color: red;
+      }
+    `}
+  </style>
+  <p id="red">Hello</p>
+  <p>World</p>
+</WebExample>
+
+```css
+#red {
+  color: red;
+}
+```
+
+```html
+<p id="red">Hello</p>
+<p>World</p>
+```
+
+上記の例では、`#red` IDに対して`color`プロパティに`red`を指定しています。
+
+## 全称セレクター
+
+全ての要素にスタイルを適用するセレクターです。
+全称セレクターは、アスタリスク（`*`）で指定します。
+
+<WebExample>
+  <style>
+    {`
+      * {
+        color: red;
+      }
+    `}
+  </style>
+  <p>Hello</p>
+  <p>World</p>
+</WebExample>
+
+```css
+* {
+  color: red;
+}
+```
+
+```html
+<p>Hello</p>
+<p>World</p>
+```
+
+上記の例では、全ての要素に対して`color`プロパティに`red`を指定しています。
+
+## 属性セレクター
+
+属性セレクターは、角括弧（`[]`）で属性や属性の値を指定します。
+
+| セレクター | 説明 |
+| --- | --- |
+| `[attr]` | `attr`属性を持つ要素 |
+| `[attr="value"]` | `attr`属性で値が`value`と完全一致する要素 |
+| `[attr~="value"]` | `attr`属性で値が`value`を含む要素 |
+| `[attr\|="value"]` | `attr`属性で値が`value`または`value-`で始まる要素 |
+| `[attr^="value"]` | `attr`属性で値が`value`で始まる要素 |
+| `[attr$="value"]` | `attr`属性で値が`value`で終わる要素 |
+| `[attr*="value"]` | `attr`属性で値が`value`と部分一致する要素 |
+
+<WebExample>
+  <style>
+    {`
+      [class] {
+        font-size: 20px;
+      }
+      [class=red] {
+        color: red;
+      }
+      [class~=bold] {
+        font-weight: bold;
+      }
+      [class|=strike] {
+        text-decoration: line-through;
+      }
+    `}
+  </style>
+  <ul>
+    <li>First</li>
+    <li className="red">Second</li>
+    <li className="red bold">Third</li>
+    <li className="strike-through">Fourth</li>
+  </ul>
+</WebExample>
+
+```css
+[class] {
+  font-size: 20px;
+}
+
+[class="red"] {
+  color: red;
+}
+
+[class~="bold"] {
+  font-weight: bold;
+}
+
+[class|="strike"] {
+  text-decoration: line-through;
+}
+```
+
+```html
+<ul>
+  <li>First</li>
+  <li class="red">Second</li>
+  <li class="red bold">Third</li>
+  <li class="strike-through">Fourth</li>
+</ul>
+```
+
+- `[class]`は、`class`属性を持つ全ての要素に対して`font-size`プロパティに`20px`を指定しています。
+- `[class="red"]`は、`class`属性で値が`red`と完全一致する要素に対して`color`プロパティに`red`を指定しています。`red`クラスを持つ`Third`には適用されていないことに注意してください。
+- `[class~="bold"]`は、`class`属性で値が`bold`を含む要素に対して`font-weight`プロパティに`bold`を指定しています。
+- `[class|="strike"]`は、`class`属性で値が`strike`または`strike-`で始まる要素に対して`text-decoration`プロパティに`line-through`を指定しています。
+
+本書のサイドバーにて、閲覧中のページのリンクの色が変わっていることに気づいた方もいるでしょう。これは、`aria-current="page"`属性を持つリンクに対してスタイルを適用しているためです。
+
+## セレクターリスト
+
+カンマ（`,`）でセレクターを区切ることで複数のセレクターを指定することができます。
+
+<WebExample>
+  <style>
+    {`
+      h1, h2 {
+        color: red;
+      }
+    `}
+  </style>
+  <h1>Hello</h1>
+  <h2>World</h2>
+</WebExample>
+
+```css
+h1, h2 {
+  color: red;
+}
+```
+
+```html
+<h1>Hello</h1>
+<h2>World</h2>
+```
+
+## セレクターを組み合わせる
+
+セレクターを空白を入れずに繋げることで、複数のセレクターを組み合わせることができます。
+
+<WebExample>
+  <style>
+    {`
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+      .red.blue {
+        color: purple;
+      }
+    `}
+  </style>
+  <p className="red">Hello</p>
+  <p className="blue">World</p>
+  <p className="red blue">Hello, World!</p>
+</WebExample>
+
+```css
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.red.blue {
+  color: purple;
+}
+```
+
+```html
+<p class="red">Hello</p>
+<p class="blue">World</p>
+<p class="red blue">Hello, World!</p>
+```

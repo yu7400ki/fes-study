@@ -16,7 +16,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <code {...props} className={props?.className ?? cx(code(), css({ mx: 0.5 }))} />
     ),
     pre: (props) => (
-      <pre {...props} className={cx(props?.className, css({ p: 4, rounded: "md" }))} />
+      <pre
+        {...props}
+        className={cx(props?.className, css({ p: 4, rounded: "md", overflowX: "auto" }))}
+      />
     ),
     table: (props) => <Table.Root {...props} variant="outline" />,
     thead: (props) => <Table.Head {...props} />,

@@ -15,9 +15,6 @@ export default defineConfig({
   jsxFramework: "react",
   outdir: "styled-system",
   globalCss: {
-    html: {
-      scrollbarGutter: "stable",
-    },
     body: {
       minHeight: "100dvh",
     },

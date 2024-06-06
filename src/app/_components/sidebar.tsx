@@ -8,7 +8,7 @@ import { iconButton } from "styled-system/recipes";
 import Navigation from "./navigation";
 
 export default function Sidebar() {
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(true);
 
@@ -67,9 +67,9 @@ export default function Sidebar() {
         <button
           type="button"
           className={cx(iconButton({ size: "xs", variant: "ghost" }), css({ color: "fg.muted" }))}
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
         >
-          {mounted ? theme === "light" ? <SunIcon /> : <MoonIcon /> : null}
+          {mounted ? resolvedTheme === "light" ? <SunIcon /> : <MoonIcon /> : null}
         </button>
         <button
           type="button"

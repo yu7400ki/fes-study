@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className={cx(inter.className, notoSansJp.className)}>
-        <ThemeProvider defaultTheme="light" attribute="class">
+        <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
           <Container
             maxWidth="6xl"
             display="flex"

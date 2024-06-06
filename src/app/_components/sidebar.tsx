@@ -2,25 +2,19 @@
 
 import { MoonIcon, PanelLeftClose, PanelLeftOpen, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { css, cx } from "styled-system/css";
 import { iconButton } from "styled-system/recipes";
+import Navigation from "./navigation";
 
-export type SidebarData = {
-  title: string;
-  pages: { name: string; path: string }[];
-}[];
-
-type Props = {
-  data: SidebarData;
-};
-
-export default function Sidebar({ data }: Props) {
-  const pathname = usePathname();
-  const { theme = "light", setTheme } = useTheme();
+export default function Sidebar() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <aside
@@ -43,11 +37,8 @@ export default function Sidebar({ data }: Props) {
       )}
       data-open={open}
     >
-      <nav
+      <Navigation
         className={css({
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
           pb: 6,
           height: "calc(100vh - {spacing.12} - {spacing.14})",
           overflowX: "hidden",
@@ -56,42 +47,7 @@ export default function Sidebar({ data }: Props) {
             width: 0,
           },
         })}
-      >
-        {data.map((section) => (
-          <section key={section.title}>
-            <h2 className={css({ mb: 4 })}>{section.title}</h2>
-            <ul
-              className={css({
-                "& > * + *": {
-                  mt: 1,
-                },
-              })}
-            >
-              {section.pages.map((page) => (
-                <li key={page.path}>
-                  <Link
-                    href={page.path}
-                    className={css({
-                      whiteSpace: "nowrap",
-                      color: {
-                        base: "fg.muted",
-                        _currentPage: "accent.default",
-                      },
-                      textDecoration: {
-                        base: "none",
-                        _hover: "underline",
-                      },
-                    })}
-                    aria-current={pathname === page.path ? "page" : undefined}
-                  >
-                    {page.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </nav>
+      />
       <div
         className={css({
           borderTop: "1px solid",
@@ -113,7 +69,7 @@ export default function Sidebar({ data }: Props) {
           className={cx(iconButton({ size: "xs", variant: "ghost" }), css({ color: "fg.muted" }))}
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
-          {theme === "light" ? <SunIcon /> : <MoonIcon />}
+          {mounted ? theme === "light" ? <SunIcon /> : <MoonIcon /> : null}
         </button>
         <button
           type="button"

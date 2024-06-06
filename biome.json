@@ -10,6 +10,9 @@
     "enabled": true,
     "rules": {
       "all": true,
+      "performance": {
+        "noBarrelFile": "off"
+      },
       "correctness": {
         "noUndeclaredVariables": "off",
         "noUnusedVariables": "error"

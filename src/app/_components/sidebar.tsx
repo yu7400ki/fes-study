@@ -1,25 +1,20 @@
 "use client";
 
-import { MoonIcon, PanelLeftClose, PanelLeftOpen, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { useState } from "react";
 import { css, cx } from "styled-system/css";
 import { iconButton } from "styled-system/recipes";
 import Navigation from "./navigation";
+import ToggleTheme from "./toggle-theme";
 
 export default function Sidebar() {
-  const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(true);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <aside
       className={cx(
         css({
+          display: { base: "none", md: "block" },
           top: 12,
           mt: 12,
           position: "sticky",
@@ -64,13 +59,9 @@ export default function Sidebar() {
           },
         })}
       >
-        <button
-          type="button"
+        <ToggleTheme
           className={cx(iconButton({ size: "xs", variant: "ghost" }), css({ color: "fg.muted" }))}
-          onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
-        >
-          {mounted ? resolvedTheme === "light" ? <SunIcon /> : <MoonIcon /> : null}
-        </button>
+        />
         <button
           type="button"
           className={cx(iconButton({ size: "xs", variant: "ghost" }), css({ color: "fg.muted" }))}

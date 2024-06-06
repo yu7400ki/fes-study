@@ -25,6 +25,7 @@ export default function RootLayout({
           <Container
             maxWidth="6xl"
             display="flex"
+            flexDirection={{ base: "column", md: "row" }}
             gap={{
               base: 2,
               md: 4,

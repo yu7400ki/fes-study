@@ -18,6 +18,10 @@
       {
         "name": "結合子",
         "path": "/css/combinators"
+      },
+      {
+        "name": "疑似クラス",
+        "path": "/css/pseudo-classes"
       }
     ]
   }

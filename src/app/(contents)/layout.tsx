@@ -8,6 +8,7 @@ export default function Layout({
   return (
     <main
       className={css({
+        flexGrow: 1,
         py: 12,
         lineHeight: "relaxed",
         "& > * + *": {

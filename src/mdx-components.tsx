@@ -1,8 +1,8 @@
 import { Table } from "@/components/ui";
+import { ExternalLinkIcon } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { css, cva, cx } from "styled-system/css";
 import { code, link, text } from "styled-system/recipes";
-import { ExternalLinkIcon } from "lucide-react";
 
 // biome-ignore lint/style/useNamingConvention:
 export function useMDXComponents(components: MDXComponents): MDXComponents {

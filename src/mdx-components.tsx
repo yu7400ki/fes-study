@@ -1,7 +1,8 @@
 import { Table } from "@/components/ui";
 import type { MDXComponents } from "mdx/types";
 import { css, cva, cx } from "styled-system/css";
-import { code, text } from "styled-system/recipes";
+import { code, link, text } from "styled-system/recipes";
+import { ExternalLinkIcon } from "lucide-react";
 
 // biome-ignore lint/style/useNamingConvention:
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -33,6 +34,21 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: (props) => (
       <ol {...props} className={cx(props?.className, listRecipe({ style: "decimal" }))} />
     ),
+    a: (_props) => {
+      const props = { ..._props };
+      const { href } = props;
+      const isInternal = href?.startsWith("/");
+      if (!isInternal) {
+        props.target = "_blank";
+        props.rel = "noopener noreferrer";
+      }
+      return (
+        <a {...props} className={cx(props?.className, link())}>
+          {props.children}
+          {!isInternal && <ExternalLinkIcon />}
+        </a>
+      );
+    },
     ...components,
   };
 }

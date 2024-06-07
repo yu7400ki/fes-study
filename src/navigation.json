@@ -14,6 +14,10 @@
       {
         "name": "セレクターの基本",
         "path": "/css/basic-selectors"
+      },
+      {
+        "name": "結合子",
+        "path": "/css/combinators"
       }
     ]
   }

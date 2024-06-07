@@ -1,4 +1,5 @@
 import { css } from "styled-system/css";
+import { Pager } from "./_components";
 
 export default function Layout({
   children,
@@ -10,13 +11,22 @@ export default function Layout({
       className={css({
         flexGrow: 1,
         py: 12,
-        lineHeight: "relaxed",
         "& > * + *": {
-          mt: "1.5em",
+          mt: 12,
         },
       })}
     >
-      {children}
+      <article
+        className={css({
+          lineHeight: "relaxed",
+          "& > * + *": {
+            mt: "1.5em",
+          },
+        })}
+      >
+        {children}
+      </article>
+      <Pager />
     </main>
   );
 }

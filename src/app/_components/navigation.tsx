@@ -29,7 +29,7 @@ export default function Navigation({ className }: Props) {
           <ul
             className={css({
               "& > * + *": {
-                mt: 1,
+                mt: 2,
               },
             })}
           >

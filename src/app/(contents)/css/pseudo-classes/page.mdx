@@ -220,7 +220,12 @@ p:first-child {
 ## :nth-child()
 
 `:nth-child()`疑似クラスは、兄弟要素のグループの中で指定した位置の要素に適用されます。
-位置は`an + b`の形式で指定します。
+位置は`An + B`の形式で指定します。
+
+また、以下のキーワードも使用できます。
+
+- `odd`: 奇数番目の要素(`2n + 1`に相当)
+- `even`: 偶数番目の要素(`2n`に相当)
 
 <WebExample>
   <style>
@@ -234,6 +239,7 @@ p:first-child {
     <p>First</p>
     <p>Second</p>
     <p>Third</p>
+    <p>Fourth</p>
   </div>
 </WebExample>
 
@@ -248,6 +254,7 @@ p:nth-child(2n) {
   <p>First</p>
   <p>Second</p>
   <p>Third</p>
+  <p>Fourth</p>
 </div>
 ```
 

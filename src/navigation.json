@@ -22,6 +22,10 @@
       {
         "name": "疑似クラス",
         "path": "/css/pseudo-classes"
+      },
+      {
+        "name": "疑似要素",
+        "path": "/css/pseudo-elements"
       }
     ]
   }

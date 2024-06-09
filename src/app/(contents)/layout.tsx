@@ -11,6 +11,7 @@ export default function Layout({
       className={css({
         flexGrow: 1,
         py: 12,
+        minW: 0,
         "& > * + *": {
           mt: 12,
         },

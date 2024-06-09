@@ -10,8 +10,5 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
-  },
-  "files.associations": {
-    "*.mdx": "markdown"
   }
 }

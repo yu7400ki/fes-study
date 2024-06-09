@@ -20,7 +20,7 @@ selector:pseudo-class {
 
 ## :hover
 
-`:hover`疑似クラスは、マウスが要素に乗ったときに適用されます。
+`:hover`疑似クラスは、マウスが乗った要素を選択します。
 
 <WebExample>
   <style>
@@ -35,7 +35,7 @@ selector:pseudo-class {
 
 ```css
 p:hover {
-  background-color: lightblue;
+  text-decoration: underline;
 }
 ```
 
@@ -45,7 +45,7 @@ p:hover {
 
 ## :active
 
-`:active`疑似クラスは、要素がアクティブ（クリックされるなど）時に適用されます。
+`:active`疑似クラスは、アクティブ（クリックされたなど）な要素を選択します。
 
 <WebExample>
   <style>
@@ -70,7 +70,7 @@ button:active {
 
 ## :focus-visible
 
-`:focus-visible`疑似クラスは、要素がフォーカスされ、ユーザーエージェントが要素にフォーカスを明示するべきであると推測的に判断した場合に適用されます。
+`:focus-visible`疑似クラスは、要素がフォーカスされ、ユーザーエージェントがフォーカスを明示するべきであると判断した要素を選択します。
 
 <WebExample>
   <style>
@@ -95,7 +95,7 @@ input:focus-visible {
 
 ## :focus-within
 
-`:focus-within`疑似クラスは、要素自体またはその子孫要素がフォーカスされたときに適用されます。
+`:focus-within`疑似クラスは、要素自体またはその子孫要素がフォーカスされた要素を選択します。
 
 <WebExample>
   <style>
@@ -124,7 +124,7 @@ div:focus-within {
 
 ## :checked
 
-`:checked`疑似クラスは、チェックされたチェックボックスやラジオボタンに適用されます。
+`:checked`疑似クラスは、チェックされたチェックボックスやラジオボタンを選択します。
 
 <WebExample>
   <style>
@@ -163,7 +163,7 @@ input:checked + div {
 
 ## :invalid
 
-`:invalid`疑似クラスは、無効な内容を持つフォーム要素に適用されます。
+`:invalid`疑似クラスは、不正な内容を持つフォーム要素を選択します。
 
 <WebExample>
   <style>
@@ -186,9 +186,37 @@ input:invalid {
 <input type="email" value="@example.com" />
 ```
 
+似た疑似クラスに`:valid`があります。
+こちらは、正しい内容を持つフォーム要素を選択します。
+
+## :disabled
+
+`:disabled`疑似クラスは、無効化されたフォーム要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      input:disabled {
+        background-color: lightgray;
+      }
+    `}
+  </style>
+  <input type="text" disabled />
+</WebExample>
+
+```css
+input:disabled {
+  background-color: lightgray;
+}
+```
+
+```html
+<input type="text" disabled />
+```
+
 ## :first-child
 
-`:first-child`疑似クラスは、兄弟要素のグループの中で最初の要素に適用されます。
+`:first-child`疑似クラスは、兄弟要素のグループの中で最初の要素を選択します。
 
 <WebExample>
   <style>
@@ -217,9 +245,12 @@ p:first-child {
 </div>
 ```
 
+似た疑似クラスに`:last-child`があります。
+こちらは、兄弟要素のグループの中で最後の要素を選択します。
+
 ## :nth-child()
 
-`:nth-child()`疑似クラスは、兄弟要素のグループの中で指定した位置の要素に適用されます。
+`:nth-child()`疑似クラスは、兄弟要素のグループの中で指定した位置の要素を選択します。
 位置は`An + B`の形式で指定します。
 
 また、以下のキーワードも使用できます。
@@ -260,7 +291,7 @@ p:nth-child(2n) {
 
 ## :not()
 
-`:not()`疑似クラスは、指定したセレクターに一致しない要素に適用されます。
+`:not()`疑似クラスは、指定したセレクターに一致しない要素を選択します。
 
 <WebExample>
   <style>
@@ -287,7 +318,7 @@ p:not(.red) {
 
 ## :has()
 
-`:has()`疑似クラスは、指定したセレクターに一致する子要素を持つ要素に適用されます。
+`:has()`疑似クラスは、指定したセレクターに一致する子要素を持つ要素を選択します。
 
 <WebExample>
   <style>

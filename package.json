@@ -4,14 +4,13 @@
   "private": true,
   "scripts": {
     "prepare": "panda codegen",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome lint ./src",
-    "lint:fix": "biome lint ./src --apply",
-    "check": "biome check ./src",
-    "check:fix": "biome check ./src --apply",
-    "format": "biome format ./src --write"
+    "dev": "vite",
+    "build": "vite build --mode client && vite build",
+    "lint": "biome lint ./app",
+    "lint:fix": "biome lint ./app --apply",
+    "check": "biome check ./app",
+    "check:fix": "biome check ./app --apply",
+    "format": "biome format ./app --write"
   },
   "dependencies": {
     "hono": "^4.4.5",

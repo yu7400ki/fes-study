@@ -41,7 +41,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         props.rel = "noopener noreferrer";
       }
       return (
-        <a {...props} class={asyncCx(props?.className, link())}>
+        <a {...props} class={asyncCx(props?.class, link())}>
           {props.children}
           {!isInternal && <ExternalLinkIcon />}
         </a>

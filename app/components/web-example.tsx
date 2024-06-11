@@ -1,6 +1,6 @@
 import type { Child } from "hono/jsx";
 import { css } from "styled-system/css";
-import { ShadowDom } from "../islands";
+import ShadowDom from "../islands/shadow-dom";
 
 function unescapeHtml(html: string): string {
   return html

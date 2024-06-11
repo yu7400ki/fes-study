@@ -1,0 +1,7 @@
+@layer reset, base, tokens, recipes, utilities;
+
+@layer base {
+  @view-transition {
+    navigation: auto;
+  }
+}

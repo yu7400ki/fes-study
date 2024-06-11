@@ -1,0 +1,202 @@
+---
+title: 疑似要素
+---
+
+import WebExample from "../../components/web-example";
+
+# 疑似要素
+
+疑似要素は、要素の特定の部分にスタイルを適用するための記法です。
+
+疑似要素には非常に多くの種類がありますが、ここでは`::before`と`::after`を紹介します。
+必要に応じて、[MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/CSS/Pseudo-elements)などを参照してください。
+
+## 構文
+
+```css
+selector::pseudo-element {
+  property: value;
+}
+```
+
+## ::before
+
+`::before`疑似要素は、要素の最初の子要素として挿入されます。
+
+<WebExample>
+  <style>
+    {`
+      a::before {
+        content: "🔗"
+      }
+    `}
+  </style>
+  <a href="#">Link</a>
+</WebExample>
+
+```css
+p::before {
+  content: "🔗";
+}
+```
+
+```html
+<a href="#">Link</a>
+```
+
+## ::after
+
+`::after`疑似要素は、要素の最後の子要素として挿入されます。
+
+<WebExample>
+  <style>
+    {`
+      p::after {
+        content: "✍️"
+      }
+    `}
+  </style>
+  <p>Text</p>
+</WebExample>
+
+```css
+p::after {
+  content: "✍️";
+}
+```
+
+```html
+<p>Text</p>
+```
+
+## 相対位置
+
+`::before`や`::after`疑似要素は、`position`プロパティを使って相対的な位置を指定することができます。
+
+<WebExample>
+  <style>
+    {`
+      .icon {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      .icon::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+      }
+    `}
+  </style>
+  <div class="icon">
+  </div>
+</WebExample>
+
+```css
+.icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.icon::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+}
+```
+
+```html
+<div class="icon">
+</div>
+```
+
+## 属性値の使用
+
+<WebExample>
+  <style>
+    {`
+      .icon {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      .icon::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+      }
+      .icon::after {
+        content: attr(data-icon);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+      }
+    `}
+  </style>
+  <div class="icon" data-icon="📧">
+  </div>
+</WebExample>
+
+```css
+.icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.icon::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+}
+.icon::after {
+  content: attr(data-icon);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+}
+```
+
+```html
+<div class="icon" data-icon="📧">
+</div>
+```

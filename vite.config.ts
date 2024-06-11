@@ -1,15 +1,15 @@
 import ssg from "@hono/vite-ssg";
+import mdx from "@mdx-js/rollup";
+import rehypeShiki from "@shikijs/rehype";
 import honox from "honox/vite";
 import client from "honox/vite/client";
+import remarkBreaks from "remark-breaks";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import { visit } from "unist-util-visit";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import mdx from "@mdx-js/rollup";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import remarkBreaks from "remark-breaks";
-import rehypeShiki from "@shikijs/rehype";
-import remarkGfm from "remark-gfm";
-import { visit } from "unist-util-visit";
 
 const entry = "./app/server.ts";
 const basePlugins = [tsconfigPaths()];

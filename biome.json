@@ -15,7 +15,8 @@
       },
       "correctness": {
         "noUndeclaredVariables": "off",
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "error",
+        "useJsxKeyInIterable": "off"
       },
       "style": {
         "useExportType": "error",
@@ -29,9 +30,6 @@
         "noDefaultExport": "off",
         "noImplicitBoolean": "off",
         "noNamespaceImport": "off"
-      },
-      "nursery": {
-        "useImportRestrictions": "error"
       },
       "complexity": {
         "noUselessLoneBlockStatements": "off",

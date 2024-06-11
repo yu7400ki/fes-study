@@ -1,0 +1,481 @@
+---
+title: 疑似クラス
+---
+
+import WebExample from "../../components/web-example";
+
+# 疑似クラス
+
+疑似クラスは、要素の状態に応じてスタイルを適用するための記法です。
+
+疑似クラスには非常に多くの種類がありますが、ここでは個人的によく使うものを紹介します。
+必要に応じて、[MDN Web Docs](https://developer.mozilla.org/ja/docs/Web/CSS/Pseudo-classes)などを参照してください。
+
+## 構文
+
+```css
+selector:pseudo-class {
+  property: value;
+}
+```
+
+## :hover
+
+`:hover`疑似クラスは、マウスが乗った要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      p:hover {
+        text-decoration: underline;
+      }
+    `}
+  </style>
+  <p>Hover me</p>
+</WebExample>
+
+```css
+p:hover {
+  text-decoration: underline;
+}
+```
+
+```html
+<p>Hover me</p>
+```
+
+## :active
+
+`:active`疑似クラスは、アクティブ（クリックされたなど）な要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      button:active {
+        background-color: lightblue;
+      }
+    `}
+  </style>
+  <button>Click me</button>
+</WebExample>
+
+```css
+button:active {
+  background-color: lightblue;
+}
+```
+
+```html
+<button>Click me</button>
+```
+
+## :focus-visible
+
+`:focus-visible`疑似クラスは、要素がフォーカスされ、ユーザーエージェントがフォーカスを明示するべきであると判断した要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      input:focus-visible {
+        outline: 2px solid red;
+      }
+    `}
+  </style>
+  <input type="text" />
+</WebExample>
+
+```css
+input:focus-visible {
+  outline: 2px solid red;
+}
+```
+
+```html
+<input type="text" />
+```
+
+## :focus-within
+
+`:focus-within`疑似クラスは、要素自体またはその子孫要素がフォーカスされた要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      div:focus-within {
+        background-color: lightblue;
+      }
+    `}
+  </style>
+  <div>
+    <input type="text" />
+  </div>
+</WebExample>
+
+```css
+div:focus-within {
+  background-color: lightblue;
+}
+```
+
+```html
+<div>
+  <input type="text" />
+</div>
+```
+
+## :checked
+
+`:checked`疑似クラスは、チェックされたチェックボックスやラジオボタンを選択します。
+
+<WebExample>
+  <style>
+    {`
+      div {
+        height: 0;
+        overflow: hidden;
+      }
+      input:checked + div {
+        border: 1px solid black;
+        height: 100px;
+      }
+    `}
+  </style>
+  <label htmlFor="checkbox">Check me</label>
+  <input type="checkbox" id="checkbox" />
+  <div>Checked!</div>
+</WebExample>
+
+```css
+div {
+  height: 0;
+  overflow: hidden;
+}
+input:checked + div {
+  border: 1px solid black;
+  height: 100px;
+}
+```
+
+```html
+<label for="checkbox">Check me</label>
+<input type="checkbox" id="checkbox" />
+<div>Checked!</div>
+```
+
+## :invalid
+
+`:invalid`疑似クラスは、不正な内容を持つフォーム要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      input:invalid {
+        border: 1px solid red;
+      }
+    `}
+  </style>
+  <input type="email" value="@example.com" />
+</WebExample>
+
+```css
+input:invalid {
+  border: 1px solid red;
+}
+```
+
+```html
+<input type="email" value="@example.com" />
+```
+
+似た疑似クラスに`:valid`があります。
+こちらは、正しい内容を持つフォーム要素を選択します。
+
+## :disabled
+
+`:disabled`疑似クラスは、無効化されたフォーム要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      input:disabled {
+        background-color: lightgray;
+      }
+    `}
+  </style>
+  <input type="text" disabled />
+</WebExample>
+
+```css
+input:disabled {
+  background-color: lightgray;
+}
+```
+
+```html
+<input type="text" disabled />
+```
+
+## :first-child
+
+`:first-child`疑似クラスは、兄弟要素のグループの中で最初の要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      p:first-child {
+        color: red;
+      }
+    `}
+  </style>
+  <div>
+    <p>First</p>
+    <p>Second</p>
+  </div>
+</WebExample>
+
+```css
+p:first-child {
+  color: red;
+}
+```
+
+```html
+<div>
+  <p>First</p>
+  <p>Second</p>
+</div>
+```
+
+似た疑似クラスに`:last-child`があります。
+こちらは、兄弟要素のグループの中で最後の要素を選択します。
+
+## :nth-child()
+
+`:nth-child()`疑似クラスは、兄弟要素のグループの中で指定した位置の要素を選択します。
+位置は`An + B`の形式で指定します。
+
+また、以下のキーワードも使用できます。
+
+- `odd`: 奇数番目の要素(`2n + 1`に相当)
+- `even`: 偶数番目の要素(`2n`に相当)
+
+<WebExample>
+  <style>
+    {`
+      p:nth-child(2n) {
+        color: red;
+      }
+    `}
+  </style>
+  <div>
+    <p>First</p>
+    <p>Second</p>
+    <p>Third</p>
+    <p>Fourth</p>
+  </div>
+</WebExample>
+
+```css
+p:nth-child(2n) {
+  color: red;
+}
+```
+
+```html
+<div>
+  <p>First</p>
+  <p>Second</p>
+  <p>Third</p>
+  <p>Fourth</p>
+</div>
+```
+
+## :not()
+
+`:not()`疑似クラスは、指定したセレクターに一致しない要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      p:not(.red) {
+        color: blue;
+      }
+    `}
+  </style>
+  <p class="red">Red</p>
+  <p>Blue</p>
+</WebExample>
+
+```css
+p:not(.red) {
+  color: blue;
+}
+```
+
+```html
+<p class="red">Red</p>
+<p>Blue</p>
+```
+
+## :has()
+
+`:has()`疑似クラスは、指定したセレクターに一致する子要素を持つ要素を選択します。
+
+<WebExample>
+  <style>
+    {`
+      div:has(p) {
+        background-color: lightblue;
+      }
+    `}
+  </style>
+  <div>
+    <p>Hello</p>
+  </div>
+  <div>
+    <span>World</span>
+  </div>
+</WebExample>
+
+```css
+div:has(p) {
+  background-color: lightblue;
+}
+```
+
+```html
+<div>
+  <p>Hello</p>
+</div>
+<div>
+  <span>World</span>
+</div>
+```
+
+また、結合子を使用することで、子要素以外も指定できます。
+
+<WebExample>
+  <style>
+    {`
+      p:has(+ p) {
+        background-color: lightblue;
+      }
+    `}
+  </style>
+  <p>Hello</p>
+  <p>World</p>
+</WebExample>
+
+```css
+p:has(+ p) {
+  background-color: lightblue;
+}
+```
+
+```html
+<p>Hello</p>
+<p>World</p>
+```
+
+## 複雑なスタイル
+
+結合子や疑似クラスを組み合わせることで、複雑なスタイルもCSSのみで記述することができます。
+
+<WebExample>
+  <style>
+    {`
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        display: flex;
+      }
+      label {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+      }
+      label:hover,
+      label:has(input:checked) {
+        background-color: lightblue;
+      }
+      label:has(input:checked) + label:has(input:checked) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      label:has(input:checked):has(+ label > input:checked) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    `}
+  </style>
+  <div>
+    <label>
+      <input type="checkbox" />
+    </label>
+    <label>
+      <input type="checkbox" />
+    </label>
+    <label>
+      <input type="checkbox" />
+    </label>
+    <label>
+      <input type="checkbox" />
+    </label>
+    <label>
+      <input type="checkbox" />
+    </label>
+  </div>
+</WebExample>
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+}
+div {
+  display: flex;
+}
+label {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+label:hover,
+label:has(input:checked) {
+  background-color: lightblue;
+}
+label:has(input:checked) + label:has(input:checked) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+label:has(input:checked):has(+ label > input:checked) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+```
+
+```html
+<div>
+  <label>
+    <input type="checkbox" />
+  </label>
+  <label>
+    <input type="checkbox" />
+  </label>
+  <label>
+    <input type="checkbox" />
+  </label>
+  <label>
+    <input type="checkbox" />
+  </label>
+  <label>
+    <input type="checkbox" />
+  </label>
+</div>
+```

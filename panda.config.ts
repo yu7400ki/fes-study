@@ -11,8 +11,7 @@ export default defineConfig({
       borderRadius: "md",
     }),
   ],
-  include: ["./src/**/*.{js,jsx,ts,tsx}"],
-  jsxFramework: "react",
+  include: ["./app/**/*.{js,jsx,ts,tsx}"],
   outdir: "styled-system",
   globalCss: {
     body: {

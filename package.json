@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "hono": "^4.4.5",
-    "honox": "^0.1.21"
+    "honox": "^0.1.21",
+    "rehype-slug": "^6.0.0",
+    "remark-toc": "^9.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",

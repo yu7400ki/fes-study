@@ -35,7 +35,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: (_props) => {
       const props = { ..._props };
       const { href } = props;
-      const isInternal = href?.startsWith("/");
+      const isInternal = href?.startsWith("/") || href?.startsWith("#");
       if (!isInternal) {
         props.target = "_blank";
         props.rel = "noopener noreferrer";

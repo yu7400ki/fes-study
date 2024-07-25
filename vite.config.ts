@@ -6,6 +6,8 @@ import client from "honox/vite/client";
 import remarkBreaks from "remark-breaks";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
+import remarkToc from "remark-toc";
+import rehypeSlug from "rehype-slug";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { visit } from "unist-util-visit";
 import { defineConfig } from "vite";
@@ -37,7 +39,13 @@ export default defineConfig(({ mode }) => {
         elementAttributeNameCase: "html",
         jsxImportSource: "hono/jsx",
         providerImportSource: "./app/lib/mdx-components.tsx",
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkBreaks, remarkGfm],
+        remarkPlugins: [
+          remarkFrontmatter,
+          remarkMdxFrontmatter,
+          remarkBreaks,
+          remarkGfm,
+          [remarkToc, { heading: "目次" }],
+        ],
         rehypePlugins: [
           [rehypeShiki, { theme: "github-dark" }],
           () => (tree) => {
@@ -52,6 +60,7 @@ export default defineConfig(({ mode }) => {
               codeEl.properties.class = [...(codeEl.properties.class || []), "code-block"];
             });
           },
+          rehypeSlug,
         ],
       }),
     ],

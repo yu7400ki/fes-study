@@ -1,0 +1,773 @@
+---
+title: フレックスボックス
+---
+
+import WebExample from "../../components/web-example";
+
+# フレックスボックス
+
+フレックスボックスは、コンテナ内のアイテムを整列するための1次元のレイアウト方法です。
+フレックスボックスを用いることで、横並びのレイアウトや要素間の余白の調整などが簡単に行えます。
+
+## 基本的な使い方
+
+フレックスボックスを使うためには、コンテナに `display: flex` を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</WebExample>
+
+```css
+.container {
+  display: flex;
+}
+
+.item {
+  /* フレックスアイテム */
+}
+```
+
+## フレックスコンテナのプロパティ
+
+フレックスコンテナには、以下のプロパティを指定することができます。
+
+- `flex-direction`
+- `flex-wrap`
+- `flex-flow`
+- `justify-content`
+- `align-items`
+- `align-content`
+- `gap`
+
+### flex-direction
+
+[MDN - flex-direction](https://developer.mozilla.org/ja/docs/Web/CSS/flex-direction)
+
+フレックスアイテムの配置方向を指定します。
+
+- `row`: 水平方向（デフォルト）
+- `row-reverse`: 水平方向（逆）
+- `column`: 垂直方向
+- `column-reverse`: 垂直方向（逆）
+
+<WebExample>
+  <style>
+    {`
+      .row {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .row-reverse {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .column-reverse {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <h1>flex-direction</h1>
+  <h2>row</h2>
+  <div class="row">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>row-reverse</h2>
+  <div class="row-reverse">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>column</h2>
+  <div class="column">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>column-reverse</h2>
+  <div class="column-reverse">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</WebExample>
+
+```css
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+```
+
+### flex-wrap
+
+[MDN - flex-wrap](https://developer.mozilla.org/ja/docs/Web/CSS/flex-wrap)
+
+フレックスアイテムの折り返し方法を指定します。
+
+- `nowrap`: 折り返さない（デフォルト）
+- `wrap`: 折り返す
+- `wrap-reverse`: 折り返す（逆）
+
+<WebExample>
+  <style>
+    {`
+      .nowrap {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+
+      .wrap {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .wrap-reverse {
+        display: flex;
+        flex-wrap: wrap-reverse;
+      }
+
+      .item {
+        width: 40%;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <h1>flex-wrap</h1>
+  <h2>nowrap</h2>
+  <div class="nowrap">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>wrap</h2>
+  <div class="wrap">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>wrap-reverse</h2>
+  <div class="wrap-reverse">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</WebExample>
+
+```css
+.nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrap-reverse {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.item {
+  width: 40%;
+  ...
+}
+```
+
+### flex-flow
+
+[MDN - flex-flow](https://developer.mozilla.org/ja/docs/Web/CSS/flex-flow)
+
+`flex-direction` と `flex-wrap` のショートハンドです。
+
+```css
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+```
+
+### justify-content
+
+[MDN - justify-content](https://developer.mozilla.org/ja/docs/Web/CSS/justify-content)
+
+フレックスアイテムのインライン方向の配置方法を指定します。
+`flex-direction`が横方向の場合は水平方向、縦方向の場合は垂直方向に適用されます。
+
+- `flex-start`: コンテナの開始位置に寄せる（デフォルト）
+- `flex-end`: コンテナの終了位置に寄せる
+- `center`: コンテナの中央に寄せる
+- `space-between`: アイテム間を均等に配置
+- `space-around`: アイテムの周りに余白を均等に配置
+- `space-evenly`: アイテム間と周りに余白を均等に配置
+
+<WebExample>
+  <style>
+    {`
+      .start {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .end {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+      }
+
+      .between {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .around {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .evenly {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <h1>justify-content</h1>
+  <h2>flex-start</h2>
+  <div class="start">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>flex-end</h2>
+  <div class="end">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>center</h2>
+  <div class="center">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>space-between</h2>
+  <div class="between">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>space-around</h2>
+  <div class="around">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <h2>space-evenly</h2>
+  <div class="evenly">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</WebExample>
+
+```css
+.start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.around {
+  display: flex;
+  justify-content: space-around;
+}
+```
+
+### align-items
+
+[MDN - align-items](https://developer.mozilla.org/ja/docs/Web/CSS/align-items)
+
+フレックスアイテムのブロック方向の配置方法を指定します。
+`flex-direction`が横方向の場合は垂直方向、縦方向の場合は水平方向に適用されます。
+
+- `stretch`: コンテナの高さいっぱいに伸ばす（デフォルト）
+- `flex-start`: コンテナの開始位置に寄せる
+- `flex-end`: コンテナの終了位置に寄せる
+- `center`: コンテナの中央に寄せる
+- `baseline`: アイテムのベースラインに合わせる
+
+```css
+.stretch {
+  display: flex;
+  align-items: stretch;
+}
+
+.start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.baseline {
+  display: flex;
+  align-items: baseline;
+}
+```
+
+### align-content
+
+[MDN - align-content](https://developer.mozilla.org/ja/docs/Web/CSS/align-content)
+
+複数行のフレックスアイテムのブロック方向の配置方法を指定します。
+`flex-wrap` が `wrap` または `wrap-reverse` の場合に適用されます。
+
+- `stretch`: コンテナの高さいっぱいに伸ばす（デフォルト）
+- `flex-start`: コンテナの開始位置に寄せる
+- `flex-end`: コンテナの終了位置に寄せる
+- `center`: コンテナの中央に寄せる
+- `space-between`: アイテム間を均等に配置
+- `space-around`: アイテムの周りに余白を均等に配置
+
+```css
+.stretch {
+  display: flex;
+  align-content: stretch;
+}
+
+.start {
+  display: flex;
+  align-content: flex-start;
+}
+
+.end {
+  display: flex;
+  align-content: flex-end;
+}
+
+.center {
+  display: flex;
+  align-content: center;
+}
+
+.between {
+  display: flex;
+  align-content: space-between;
+}
+
+.around {
+  display: flex;
+  align-content: space-around;
+}
+```
+
+### gap
+
+[MDN - gap](https://developer.mozilla.org/ja/docs/Web/CSS/gap)
+
+フレックスアイテム間の余白を指定します。
+`row-gap` と `column-gap` を用いることで、横方向と縦方向の余白を別々に指定することもできます。
+
+```css
+.container {
+  display: flex;
+  gap: 10px;
+}
+```
+
+## フレックスアイテムのプロパティ
+
+フレックスアイテムには、以下のプロパティを指定することができます。
+
+- `order`
+- `flex-grow`
+- `flex-shrink`
+- `flex-basis`
+- `flex`
+- `align-self`
+
+### order
+
+[MDN - order](https://developer.mozilla.org/ja/docs/Web/CSS/order)
+
+フレックスアイテムの表示順序を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item1 {
+        order: 3;
+      }
+
+      .item2 {
+        order: 2;
+      }
+
+      .item3 {
+        order: 1;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</WebExample>
+
+```css
+.item1 {
+  order: 3;
+}
+
+.item2 {
+  order: 2;
+}
+
+.item3 {
+  order: 1;
+}
+```
+
+### flex-grow
+
+[MDN - flex-grow](https://developer.mozilla.org/ja/docs/Web/CSS/flex-grow)
+
+フレックスアイテムの伸縮比率を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item1 {
+        flex-grow: 1;
+      }
+
+      .item2 {
+        flex-grow: 2;
+      }
+
+      .item3 {
+        flex-grow: 3;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</WebExample>
+
+```css
+.item1 {
+  flex-grow: 1;
+}
+
+.item2 {
+  flex-grow: 2;
+}
+
+.item3 {
+  flex-grow: 3;
+}
+```
+
+### flex-shrink
+
+[MDN - flex-shrink](https://developer.mozilla.org/ja/docs/Web/CSS/flex-shrink)
+
+フレックスアイテムの縮小比率を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item1 {
+        flex-shrink: 1;
+      }
+
+      .item2 {
+        flex-shrink: 2;
+      }
+
+      .item3 {
+        flex-shrink: 3;
+      }
+
+      .item {
+        width: 40%;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</WebExample>
+
+```css
+.item {
+  width: 40%;
+  ...
+}
+
+.item1 {
+  flex-shrink: 1;
+}
+
+.item2 {
+  flex-shrink: 2;
+}
+
+.item3 {
+  flex-shrink: 3;
+}
+```
+
+### flex-basis
+
+[MDN - flex-basis](https://developer.mozilla.org/ja/docs/Web/CSS/flex-basis)
+
+フレックスアイテムの基準サイズを指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item1 {
+        flex-basis: 100px;
+      }
+
+      .item2 {
+        flex-basis: 200px;
+      }
+
+      .item3 {
+        flex-basis: 300px;
+      }
+
+      .item {
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</WebExample>
+
+```css
+.item1 {
+  flex-basis: 100px;
+}
+
+.item2 {
+  flex-basis: 200px;
+}
+
+.item3 {
+  flex-basis: 300px;
+}
+```
+
+### flex
+
+[MDN - flex](https://developer.mozilla.org/ja/docs/Web/CSS/flex)
+
+`flex-grow`, `flex-shrink`, `flex-basis` のショートハンドです。
+
+```css
+.item {
+  flex: 1 1 100px;
+}
+```
+
+### align-self
+
+[MDN - align-self](https://developer.mozilla.org/ja/docs/Web/CSS/align-self)
+
+フレックスアイテムのブロック方向の配置方法を指定します。
+
+<WebExample>
+  <style>
+    {`
+      .container {
+        display: flex;
+      }
+
+      .item1 {
+        align-self: flex-start;
+        height: 50px;
+      }
+
+      .item2 {
+        align-self: center;
+        height: 100px;
+      }
+
+      .item3 {
+        align-self: flex-end;
+        height: 50px;
+      }
+
+      .item {
+        width: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        color: black;
+      }
+    `}
+  </style>
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</WebExample>
+
+```css
+.item1 {
+  align-self: flex-start;
+  height: 50px;
+}
+
+.item2 {
+  align-self: center;
+  height: 100px;
+}
+
+.item3 {
+  align-self: flex-end;
+  height: 50px;
+}
+```

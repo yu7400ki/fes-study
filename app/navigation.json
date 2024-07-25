@@ -26,6 +26,10 @@
       {
         "name": "疑似要素",
         "path": "/css/pseudo-elements"
+      },
+      {
+        "name": "フレックスボックス",
+        "path": "/css/flexbox"
       }
     ]
   }

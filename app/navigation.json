@@ -28,6 +28,10 @@
         "path": "/css/pseudo-elements"
       },
       {
+        "name": "様々な中央寄せ",
+        "path": "/css/centering"
+      },
+      {
         "name": "フレックスボックス",
         "path": "/css/flexbox"
       }

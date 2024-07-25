@@ -1,0 +1,264 @@
+---
+title: 様々な中央寄せ
+---
+
+import WebExample from "../../components/web-example";
+
+# 様々な中央寄せ
+
+## テキストの左右中央寄せ
+
+テキストを中央寄せにするには、`text-align`プロパティを使用します。
+
+<WebExample>
+  <style>
+    {`
+      .center {
+        text-align: center;
+      }
+    `}
+  </style>
+  <p class="center">Hello</p>
+</WebExample>
+
+```css
+.center {
+  text-align: center;
+}
+```
+
+```html
+<p class="center">Hello</p>
+```
+
+## ブロック要素の左右中央寄せ
+
+ブロック要素を中央寄せにするには、`margin-inline`プロパティを使用します。
+
+<WebExample>
+  <style>
+    {`
+      .center {
+        width: fit-content;
+        margin-inline: auto;
+      }
+    `}
+  </style>
+  <div class="center">Hello</div>
+</WebExample>
+
+```css
+.center {
+  width: fit-content;
+  margin-inline: auto;
+}
+```
+
+```html
+<div class="center">Hello</div>
+```
+
+`margin: 0 auto;`が紹介されることもよくありますが、y軸方向のマージンが0になるため、`margin-inline`を使用することを推奨します。
+
+## ブロック要素の上下左右中央寄せ
+
+### グリッドレイアウト
+
+最もモダンな方法は、グリッドレイアウトを使用することです。
+
+<WebExample>
+  <style>
+    {`
+      .center {
+        display: grid;
+        place-items: center;
+        height: 100px;
+      }
+    `}
+  </style>
+  <div class="center">Hello</div>
+</WebExample>
+
+```css
+.center {
+  display: grid;
+  place-items: center;
+}
+```
+
+```html
+<div class="center">Hello</div>
+```
+
+### フレックスボックス
+
+フレックスボックスについて詳細は、[こちらのページ](/css/flexbox)を参照してください。
+
+<WebExample>
+  <style>
+    {`
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+    `}
+  </style>
+  <div class="center">Hello</div>
+</WebExample>
+
+```css
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+```html
+<div class="center">Hello</div>
+```
+
+### position
+
+`position`プロパティを使用して、要素を絶対位置に配置する方法もあります。
+
+<WebExample>
+  <style>
+    {`
+      .parent {
+        position: relative;
+        height: 100px;
+      }
+
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    `}
+  </style>
+  <div class="parent">
+    <div class="center">Hello</div>
+  </div>
+</WebExample>
+
+```css
+.parent {
+  position: relative;
+  height: 100px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+これはやや複雑に見えるかもしれません。`top: 50%; left: 50%;`と`transform: translate(-50%, -50%);`を分けて見てみましょう。
+
+初めに`top: 50%; left: 50%;`で要素を親要素の高さ/幅の半分の値の位置に配置、つまりは要素の左上を親要素の中央に配置します。
+
+<WebExample>
+  <style>
+    {`
+      .parent {
+        position: relative;
+        height: 100px;
+      }
+
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+
+      .parent::before, .parent::after {
+        content: "";
+        position: absolute;
+        background-color: red;
+      }
+
+      .parent::before {
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+      }
+
+      .parent::after {
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+      }
+    `}
+  </style>
+  <div class="parent">
+    <div class="center">Hello</div>
+  </div>
+</WebExample>
+
+```css
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+```
+
+次に`transform: translate(-50%, -50%);`で要素自身の高さ/幅の半分の値のマイナスの位置に移動することで、要素の中心を親要素の中心に配置しています。
+
+<WebExample>
+  <style>
+    {`
+      .parent {
+        position: relative;
+        height: 100px;
+      }
+
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .parent::before, .parent::after {
+        content: "";
+        position: absolute;
+        background-color: red;
+      }
+
+      .parent::before {
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+      }
+
+      .parent::after {
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+      }
+    `}
+  </style>
+  <div class="parent">
+    <div class="center">Hello</div>
+  </div>
+</WebExample>
+
+```css
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```

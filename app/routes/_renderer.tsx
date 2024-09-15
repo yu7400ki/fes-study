@@ -1,5 +1,5 @@
 import * as Drawer from "@/components/drawer";
-import { MenuIcon, PanelLeftCloseIcon, PanelLeftOpenIcon } from "@/components/icon";
+import { MenuIcon, PanelLeftCloseIcon, PanelLeftOpenIcon, XIcon } from "@/components/icon";
 import MobileMenu from "@/components/mobile-mene";
 import Navigation from "@/components/navigation";
 import Pager from "@/components/pager";
@@ -121,7 +121,7 @@ export default jsxRenderer(({ children, title, frontmatter }, c) => {
             <Drawer.Content>
               <Drawer.Header>
                 <ToggleDrawer class={iconButton({ variant: "ghost" })}>
-                  <xIcon />
+                  <XIcon />
                 </ToggleDrawer>
               </Drawer.Header>
               <Drawer.Body>

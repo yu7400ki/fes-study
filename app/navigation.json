@@ -36,5 +36,12 @@
         "path": "/css/flexbox"
       }
     ]
+  },
+  {
+    "title": "Web",
+    "pages": [{
+      "name": "WIP: 現代のフロントエンド",
+      "path": "/web/modern-frontend"
+    }]
   }
 ]

@@ -1,0 +1,271 @@
+---
+title: 現代のフロントエンド
+---
+
+import WebExample from "../../components/web-example";
+
+# 現代のフロントエンド
+
+## 目次
+
+## はじめに
+
+現代におけるフロントエンドの開発は、今まで我々が学んできたHTML/CSS/JavaScriptを用いた単純のWebページ作成とは異なったものとなりました。
+
+筆者は、現代のフロントエンドは以下の2つの要素で支えられていると考えています。
+
+1. **宣言的UI**
+2. **コンポーネント指向**
+
+このようなアプローチにより、UIの作成・管理に対する考え方は大きく変化しました。
+
+本章では、Reactを用いてこれらの考え方に触れ、従来の開発からの変化を理解し、適応するための手助けを行います。
+
+## 前提知識の確認
+
+本題に入る前に、改めて従来の開発を振り返りましょう。
+
+ここではトグルボタンを作成することで、HTML/CSS/JavaScriptの基本を確認します。
+
+<WebExample>
+  <style>
+    {`
+      .toggle {
+        all: unset;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        background-color: transparent;
+        padding-inline: 24px;
+        padding-block: 8px;
+        user-select: none;
+        transition-duration: 0.1s;
+        box-shadow: 5px 5px rgb(82 82 82);
+      }
+
+      .toggle[aria-pressed="true"] {
+        transform: translateX(3px) translateY(3px);
+        box-shadow: 0px 0px rgb(82 82 82);
+      }
+    `}
+
+  </style>
+  <p>Toggle Button</p>
+  <button type="button" class="toggle" aria-pressed="false">☐</button>
+  <script>
+    {`
+      const button = root.querySelector('.toggle');
+      let pressed = false;
+
+      button.addEventListener('click', () => {
+        pressed = !pressed;
+        button.textContent = pressed ? '☒' : '☐';
+        button.setAttribute('aria-pressed', pressed);
+      });
+    `}
+
+  </script>
+</WebExample>
+
+### HTML
+
+**HTML(HyperText Markup Language)** は、Webページの構造を定義するためのマークアップ言語です。
+
+```html
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toggle Button</title>
+  </head>
+  <body>
+    <p>Toggle Button</p>
+    <button type="button" class="toggle" aria-pressed="false">☐</button>
+  </body>
+</html>
+```
+
+HTMLは、要素で構成されており、それぞれの要素には特定の意味があります。
+
+- `p`要素: 段落を表す
+- `button`要素: ボタンを表す
+  - `type`属性: ボタンの種類を指定
+  - `class`属性: CSSクラスを指定
+  - `aria-pressed`属性: トグルボタンの「押された」状態を表す
+
+<details>
+<summary>WAI-ARIAについて</summary>
+
+`aria-pressed`属性は、[**WAI-ARIA**(Web Accessibility Initiative - Accessible Rich Internet Applications)](https://developer.mozilla.org/ja/docs/Learn/Accessibility/WAI-ARIA_basics)の一部であり、アクセシビリティを向上させるための属性です。
+先ほど、要素には意味があることを述べました。WAIA-ARIAは、要素に追加の意味を与えることができます。
+これらは、スクリーンリーダーなどの支援技術を使用するユーザーにとって、より理解しやすいコンテンツを提供するために使用されます。
+
+<br />
+WAI-ARIAは必須というわけではありません。また、正しく使わなければ、逆にアクセシビリティを損なうこともあります。例えば、Reactには[**React Aria**](https://react-spectrum.adobe.com/react-aria)というライブラリがあります。このようなライブラリに頼ることも選択肢の一つです。
+</details>
+
+### CSS
+
+**CSS(Cascading Style Sheets)** は、Webページのスタイルを定義するためのスタイルシート言語です。
+
+```css
+.toggle {
+  all: unset;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background-color: transparent;
+  padding-inline: 24px;
+  padding-block: 8px;
+  user-select: none;
+  transition-duration: 0.1s;
+  box-shadow: 5px 5px rgb(82 82 82);
+}
+
+.toggle[aria-pressed="true"] {
+  transform: translateX(3px) translateY(3px);
+  box-shadow: 0px 0px rgb(82 82 82);
+}
+```
+
+### JavaScript
+
+**JavaScript** は、Webページに動的な振る舞いを追加するためのプログラミング言語です。
+
+```js
+const button = document.querySelector(".toggle");
+let pressed = false;
+
+function handleClick() {
+  pressed = !pressed;
+  button.textContent = pressed ? "☒" : "☐";
+  button.setAttribute("aria-pressed", pressed);
+}
+
+button.addEventListener("click", handleClick);
+```
+
+このコードでは、クリックに応じてボタンのラベルを変更し、`aria-pressed`属性をトグルするために、UIを操作する命令を記述しています。
+このようなUIは、**命令的UI**と呼ばれます。
+
+## パラダイムシフト
+
+従来の開発では、Webページ上の要素を直接操作し、その状態や表示を手動で更新してきました。しかし、現代のフロントエンド開発では、「**宣言的UI**」という考え方が導入されました。このセクションでは、宣言的UIとは何かを理解し、どのようにしてUIを管理するかについて考えます。
+
+### 命令的UI vs 宣言的UI
+
+#### 命令的UI
+
+従来のJavaScriptでは、私たちは「どのように」UIを変更するかを詳細に指示していました。つまり、手続き的にDOMの各要素を操作し、その状態を更新する必要がありました。以下に、もう一度トグルボタンの例を示します。
+
+```js
+const button = document.querySelector(".toggle");
+let pressed = false;
+
+function handleClick() {
+  pressed = !pressed;
+  button.textContent = pressed ? "☒" : "☐";
+  button.setAttribute("aria-pressed", pressed);
+}
+
+button.addEventListener("click", handleClick);
+```
+
+ここでのポイントは、「**UIをどのように変更するか**」 に注力し、イベントが発生するたびに手動でDOMを操作して、必要な要素やクラスを更新している点です。
+
+#### 宣言的UI
+
+一方、宣言的UIでは、**表示したいものを宣言する** ことで、UIの状態を自動的に更新します。これにより、開発者は「どのように」を意識することなく、UIの状態を管理できます。以下に、宣言的UIの例を擬似コードで示します。
+
+```svelte
+<script>
+  let pressed = false;
+
+  function handleClick() {
+    pressed = !pressed;
+  }
+</script>
+
+<button type="button" onclick={handleClick} aria-pressed={pressed}>
+  {pressed ? "☒" : "☐"}
+</button>
+```
+
+ここでのポイントは、「**表示したいものを宣言する**」 ことで、UIの状態を自動的に更新している点です。命令的UIの複雑さであった「どのように」をライブラリが請け負うようになったことで、開発者はより簡潔なコードでUIを管理できるようになりました。
+
+### コンポーネント指向
+
+コンポーネント指向は、宣言的UIと並んで最重要な概念の一つです。
+
+コンポーネント指向では、アプリケーションを再利用可能な部品に分割し、それぞれの部品を組み合わせてアプリケーションを構築します。これにより、複雑さをコンポーネントに閉じ込めることができます。単一の責任を持つコンポーネントを組み合わせることで、アプリケーションの構築を効率化し、保守性を向上させることができます。
+
+例えば、前述のトグルボタンのコードはコンポーネントとして見ることができます。このコンポーネントは以下のように使いまわすことができます。
+
+```svelte
+<script>
+  import ToggleButton from "...";
+</script>
+
+<p>Toggle Button</p>
+<ToggleButton />
+```
+
+---
+
+複雑化したアプリケーションを構築するために、宣言的UIを用いることで、その複雑さの一部をライブラリが請け負うようになりました。また、コンポーネント指向を用いることで、複雑さを小さく管理できるようになりました。これらは、モダンなライブラリやフレームワークに共通する重要な概念です。
+
+## React
+
+[React](https://ja.react.dev)は、宣言的UIとコンポーネント指向を取り入れたライブラリで、モダンなフロントエンドのライブラリやフレームワークの中で最も使われているものの一つです。
+
+参考：[The State of JavaScript 2023](https://2023.stateofjs.com/en-US/libraries/front-end-frameworks/)
+
+### 環境構築
+
+#### Node.jsのインストール
+
+Node.jsは、JavaScriptをサーバーサイドで実行するためのランタイム環境です。
+
+ソースコードのビルドや開発サーバーの立ち上げに必要です。
+
+[Node.js](https://nodejs.org/)の公式サイトからインストーラーをダウンロードし、インストールしてください。
+
+また、コマンドラインからのインストールも可能です。以下にWindowsの場合の例を示します。
+
+```bash
+winget install OpenJS.NodeJS.LTS
+```
+
+#### create vite
+
+Reactプロジェクトを作成するために、[Vite](https://vitejs.dev)を使用します。
+
+Viteは、高速なビルドや開発サーバーを提供するフロントエンドツールです。
+
+```bash
+npm create vite@latest my-react-app -- --template react
+```
+
+<details>
+<summary>create-react-app</summary>
+
+すでにReactを学んだことのある人、あるいは、これからReactを学び始める人は、[`create-react-app`](https://create-react-app.dev/)というツールを耳にすることがあるかもしれません。`create-react-app`は、古くから使われるReactのプロジェクトを簡単に作成するためのツールです。しかしながら、2024年9月現在、`create-react-app`は積極的にメンテナンスされておらず、[Reactの公式ドキュメント](https://ja.react.dev/learn/start-a-new-react-project)でも紹介されていません。より新しいツールとして、`Vite`を使用することをお勧めします。
+</details>
+
+<details>
+<summary>パッケージマネージャー</summary>
+
+`npm`は、Node.jsのパッケージマネージャーです(Pythonでいう`pip`のようなもの)。`npm`を使用することで、プロジェクトに必要なパッケージを簡単にインストールすることができます。
+
+<br/>
+
+パッケージマネージャーは他にも以下のようなものがあります。
+
+- [Yarn](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/)
+- [bun](https://bun.sh/) (ランタイムなども持つAll-in-Oneのツール)
+
+<br/>
+
+プロジェクトごとに使われているパッケージマネージャーが違うことがあります。この違いを吸収するために、[`ni`](https://github.com/antfu-collective/ni)などのツールがあります。`ni`はプロジェクトで使われるパッケージマネージャーを判別し、適切なコマンドを実行することができます。
+</details>
+
